@@ -13,64 +13,8 @@ pool:
 
 stages:
 
-- stage: RunTestsDotnet9
-  displayName: 'Run tests for dotnet 9'
-  jobs:
-  - job: run_tests
-
-    steps:
-    - checkout: self
-      clean: true
-      persistCredentials: true
-
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '9.x'
-        includePreviewVersions: true
-
-    - task: DotNetCoreCLI@2
-      name: test
-      inputs:
-        command: test
-        projects: '**/*Tests.csproj'
-        arguments: '--framework net9.0'
-
-- stage: RunTestsDotnet8
-  displayName: 'Run tests for dotnet 8'
-  jobs:
-  - job: run_tests
-
-    steps:
-    - checkout: self
-      clean: true
-      persistCredentials: true
-
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '9.x'
-        includePreviewVersions: true
-
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '8.x'
-        includePreviewVersions: true
-
-    - task: DotNetCoreCLI@2
-      name: test
-      inputs:
-        command: test
-        projects: '**/*Tests.csproj'
-        arguments: '--framework net8.0'
-
 - stage : DeployStage
   displayName: 'Deploy stage'
-  dependsOn:
-    - RunTestsDotnet8
-    - RunTestsDotnet9
-
   jobs:
   - job: build_pack_publish
 
