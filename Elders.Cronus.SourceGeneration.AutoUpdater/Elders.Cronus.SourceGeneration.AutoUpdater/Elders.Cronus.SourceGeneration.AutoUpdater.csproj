@@ -8,8 +8,29 @@
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 	</PropertyGroup>
 
+	<!--Nuget-->
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageId>Cronus.SourceGeneration.AutoUpdater</PackageId>
+
+		<Product>Cronus</Product>
+		<Title>Cronus</Title>
+		<Description>Cronus is a lightweight framework for building event driven systems with DDD/CQRS in mind.</Description>
+		<PackageTags>CQRS DDD ES Event store sourcing cronus</PackageTags>
+
+		<Copyright>Copyright © Elders OSS 2013-2024</Copyright>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+
+		<PackageIconUrl>https://raw.githubusercontent.com/Elders/logo/master/cronus/frame.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/Elders/Elders.Cronus.SourceGeneration.AutoUpdater.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Elders/Cronus</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+
+		<AssemblyName>Elders.Cronus.SourceGeneration.AutoUpdater</AssemblyName>
+		<RootNamespace>Elders.Cronus.SourceGeneration.AutoUpdater</RootNamespace>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<AssemblyVersion>11.0.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
