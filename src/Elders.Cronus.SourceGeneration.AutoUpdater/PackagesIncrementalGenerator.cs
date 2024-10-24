@@ -57,8 +57,9 @@ using System;
      {{
        _publisher = publisher;
        _boundedContext = bcProvider.Value;
-       _tenantOptions.OnChange(OnTenantsOptionsChanged);
+       _tenantOptions = tenantsProvider.CurrentValue;
        _logger = logger;
+       tenantsProvider.OnChange(OnTenantsOptionsChanged);
      }}
 
      public void Bootstrap()
