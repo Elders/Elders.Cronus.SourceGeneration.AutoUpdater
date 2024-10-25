@@ -10,7 +10,6 @@ public class PackagesIncrementalGenerator : IIncrementalGenerator
 {
     private const string Cronus = "cronus";
     private const string CronusGlobalNamespace = "Elders.Cronus";
-
     private const string CronusBootstrapFileName = "CronusMigratorStartup";
     private const string FileExtension = ".g.cs";
 
