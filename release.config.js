@@ -21,18 +21,10 @@ module.exports={
             set -e
             echo "##vso[task.setvariable variable=newVer;]yes"
         `,
-      }],
-      "@semantic-release/git",
-      
-      // Add the release-notes-generator to force version bump to 11.0.0
-      ["@semantic-release/release-notes-generator", {
-        presetConfig: {
-          tag: "v11.0.0"
-        }
-      }]
-    ],
-  
-  
+    }],
+    "@semantic-release/git"
+  ],
+
   branches: [
     'master',
     {name: 'beta', channel: 'beta', prerelease: true},
