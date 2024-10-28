@@ -73,7 +73,8 @@ using System;
 
     private void OnTenantsOptionsChanged(TenantsOptions newOptions)
     {{
-        _logger.Debug(() => ""Cronus tenants options re-loaded with {{@options}}"", newOptions);
+        if(_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug(""Cronus tenants options re-loaded with {{@options}}"", newOptions);
 
         _tenantOptions = newOptions;
     }}
