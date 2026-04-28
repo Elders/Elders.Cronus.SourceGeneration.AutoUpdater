@@ -26,8 +26,8 @@ stages:
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
-        version: '9.x'
-        includePreviewVersions: true
+        version: '10.x'
+        includePreviewVersions: false
 
     - task: DotNetCoreCLI@2
       name: build
