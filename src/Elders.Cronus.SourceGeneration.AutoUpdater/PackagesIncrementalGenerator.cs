@@ -39,6 +39,7 @@ using Microsoft.Extensions.Logging;
 using Elders.Cronus.Multitenancy;
 using Elders.Cronus.EventStore.AutoUpdater.Commands;
 using Elders.Cronus.EventStore.AutoUpdater;
+using System.Threading;
 using System.Threading.Tasks;
 using Elders.Cronus.AutoUpdates;
 using System.Collections.Generic;
@@ -69,16 +70,16 @@ using System.Linq;
             _logger = logger;
         }}
         
-        public void Bootstrap()
+        public async Task BootstrapAsync(CancellationToken cancellationToken = default)
         {{
             var allAutoUpdates = GetAutoUpdates();
-        
+
             bool isPropoerlyConfigured = DoSanityCheck(allAutoUpdates);
             if(isPropoerlyConfigured)
             {{
                 var id = new AutoUpdaterId(_boundedContext.Name, _cronusContextAccessor.CronusContext.Tenant);
                 var command = new BulkRequestAutoUpdate(id, _boundedContext.Name, allAutoUpdates, DateTimeOffset.UtcNow);
-                 _publisher.Publish(command);
+                await _publisher.PublishAsync(command, cancellationToken: cancellationToken).ConfigureAwait(false);
                }}
         }}
         

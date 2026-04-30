@@ -1,6 +1,8 @@
 ---
 variables:
-  PROJECT_DIR: Elders.Cronus.SourceGeneration.AutoUpdater
+- group: elders-nuget
+- name: PROJECT_DIR
+  value: Elders.Cronus.SourceGeneration.AutoUpdater
 
 trigger:
   branches:
@@ -43,7 +45,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          time curl -L https://github.com/Elders/blob/releases/download/SemRel-01/node_modules.tar.gz | 
+          time curl -L https://github.com/Elders/blob/releases/download/SemRel-01/node_modules.tar.gz |
           tar -xzv
           time npx semantic-release --no-ci
           # few commands for debugging purposes
@@ -52,12 +54,11 @@ stages:
           echo dotnet nuget `dotnet nuget --version`
           echo dotnet `dotnet --version`
 
-    - task: NuGetCommand@2
+    - task: Bash@3
       name: publish
-      enabled: true
+      displayName: nuget push to nuget.org
       condition: and(eq(variables['newVer'], 'yes'), succeeded())
       inputs:
-        command: 'push'
-        packagesToPush: '$(Build.StagingDirectory)/*.nupkg'
-        nuGetFeedType: 'external'
-        publishFeedCredentials: 'CI-AzurePipelines'
+        targetType: 'inline'
+        script: |
+          dotnet nuget push "$(Build.StagingDirectory)/*.nupkg" --api-key $(NUGET_API_KEY) --source https://api.nuget.org/v3/index.json --skip-duplicate
